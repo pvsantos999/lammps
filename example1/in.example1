@@ -3,26 +3,76 @@
 
 dimension	2
 units		lj
+variable    xlim equal 30
 lattice		sq 0.1111 origin 0.5 0.5 0.0
 region		box block 0 30 0 30 -3 3 units box
-create_box	1 box
+
+create_box	    2 box
 create_atoms	1 box
-mass		1 1.0
+create_atoms	2 box
+
+
+mass		1       1.0
+mass		2       10.0
+#mass		heavy 10.0
+
 velocity	all create 2 87287 dist gaussian
 
 # Boundary conditions
 fix 	mywalls all wall/region box lj126 0.1 0.1 2.5
 
 # Dumps
-dump myexample 	all image 1 myexample*.jpg type type
+dump myexample 	all image 1 myexample-*.jpg type type
 atom_modify	sort 0 0.0
 #run 		0
 
 # Rea run
 timestep	0.0025
+
+###########################################################
+## SAW potential
+#variable fx equal "2*3"      # works
+#fix 2 all addforce ${fx} 0 0 
+#variable      force atom 1*cos(2*2*PI*x/30)      # works
+#fix           flow all addforce v_force 0 0
+#variable      force atom 0.1*x      # works
+#variable        C equal "v_B * cos(v_A * step * dt)"
+#variable      force atom 1*cos(2*2*PI*x/v_xlim+step*dt)      # works
+
+variable      vSAW equal 0
+variable      force atom 5*cos((2*2*PI/v_xlim)*(x+v_vSAW*step*dt))      # works
+fix           flow all addforce v_force 0 0
+###########################################################
+
+
 fix 	1 all nve
 thermo	100
 run	5000
+
+#
+#################################################################
+# video generation
+#
+#To take a list of images that are padded with zeros (pic0001.png, pic0002.png…. etc) use the following command:
+#
+#ffmpeg -r 60 -f image2 -s 1920x1080 -i c:\progs\lammps\example1\myexample-%000d.jpg -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4
+# use: ffmpeg  -framerate 150 -f image2 -i c:\progs\lammps\example1\myexample-%000d.jpg -crf 20 myexample.mp
+#
+#where the %04d means that zeros will be padded until the length of the string is 4 i.e 0001…0020…0030…2000 and so on. If no padding is needed use something similar to pic%d.png or %d.png.
+#
+#    -r is the framerate (fps)
+#    -crf is the quality, lower means better quality, 15-25 is usually good
+#    -s is the resolution
+#    -pix_fmt yuv420p specifies the pixel format, change this as needed
+#
+#the file will be output (in this case) to: test.mp4
+#Specifying start and end frames
+#
+#ffmpeg -r 60 -f image2 -s 1920x1080 -start_number 1 -i pic%04d.png -vframes 1000 -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4
+#
+#    -start_number specifies what image to start at
+#    -vframes 1000 specifies the number frames/images in the video
+
 
 
 
