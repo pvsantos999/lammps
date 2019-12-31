@@ -1,0 +1,120 @@
+%
+%**********************************************************************
+% Load template
+%   
+\documentclass[10pt]{book} % use larger type; default would be 10pt
+%\documentclass[10pt]{book} % use larger type; default would be 10pt
+%\input{y:/myfiles/data/docs/DataAnalysisHeaderPythonTex}
+\input{../GetDP/docs/DataAnalysisHeaderPythonTex}
+
+\usepackage[toc,page]{appendix}
+%\usepackage{stampinclude}
+% 
+%**********************************************************************
+%
+%  Select the appropriate root directory and run with pdfLatex + Makeindex+bibtex
+\newcommand{\MainDir}{file:///y:/myfiles/Planung/2012-SonetLumiere/HomePage}
+%\def\litdir{y:/myfiles/jabref}
+\def\litdir{x:/sawoptik_databases/jabref}
+
+\bibliographystyle{\litdir/prsty}
+%\usepackage{\litdir/pylatex/python}
+
+\usepackage{makeidx}
+\makeindex
+
+%**********************************************************************
+%
+% INCLUDEONLY
+%
+%\def\rootdir{c:/progs/GetDP}
+\def\rootdir{.}
+
+%\newcommand{\mycomment}[1]{}
+%\includeonly{progs/2DM42956/docs/GetDP_2DM42956}
+%\includeonly{\rootdir/docs/GetDP_theory}
+%\includeonly{\rootdir/projects//3DSAW05Focus/docs/3DSAW05Focus}
+%**********************************************************************
+
+
+\begin{document}
+
+%\fontspec{Times New Roman} % options (among others) are: Cambria, Times New Roman, Segoe Print, etc  
+							%for options see http://ctan.mackichan.com/macros/latex/contrib/fontspec/fontspec.pdf
+%\fontspec{Cambria}
+\fontfamily{ptm}\selectfont
+%\fontfamily{Adobe Times}\selectfont
+
+
+\title{lammPS}
+\author{Paulo V. Santos}
+\date{Feb 2018 - \today}
+
+\maketitle
+
+%{\let\newpage\relax\maketitle}
+
+%\begin{abstract}
+%Contains an overview of the data analysis files
+%\end{abstract}
+
+%\tableofcontents
+{\let\newpage\relax\tableofcontents}
+
+%**********************************************************************
+
+%\input{\litdir/definitions}
+\input{../GetDP/docs/definitions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{General info}
+
+\begin{itemize}
+\item Project website: 
+\item Language reference: \href{http://lammps.sandia.gov/doc}{references}
+\item Simple tutorial: \href{http://wp.df.uba.ar/gebi/wp-content/uploads/sites/9/2016/06/lammps.pdf}{lammps for dummies}
+\item making videos: see linux-docs.pdf
+\end{itemize}
+
+%\def\GetDPRootRir{y:/myfiles/data/Elmer_Salome/GetDP}
+%\def\GetDPRootDir{\rootdir}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% General files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% GetDP section
+%\graphicspath{docs/}
+\include{\rootdir/docs/GetDP_install}
+%\include{\rootdir/docs/GetDP_SAW2D}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Project files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\include{\rootdir/docs/GetDP_3DDL}
+
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendices
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{appendices}
+\include{Appendix}
+%\include{GetDP_Usage}
+% Summary of the changes in the SAW2D and SAW3D programs
+\include{\rootdir/docs/GetDP_ChangeLog} 
+\end{appendices}
+
+% Create the reference section using BibTeX:
+
+\bibliography{\litdir/literature,\litdir/mypapers}
+%\bibliography{x:/sawoptik_databases/jabref/literature,x:/sawoptik_databases/jabref/mypapers}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "lammPS"
+%%% End: 
