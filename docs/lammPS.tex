@@ -1,120 +1,183 @@
+% ****** Start of file apssamp.tex ******
 %
-%**********************************************************************
-% Load template
-%   
-\documentclass[10pt]{book} % use larger type; default would be 10pt
-%\documentclass[10pt]{book} % use larger type; default would be 10pt
-%\input{y:/myfiles/data/docs/DataAnalysisHeaderPythonTex}
-\input{../GetDP/docs/DataAnalysisHeaderPythonTex}
-
-\usepackage[toc,page]{appendix}
-%\usepackage{stampinclude}
-% 
-%**********************************************************************
+%   This file is part of the APS files in the REVTeX 4.2 distribution.
+%   Version 4.2a of REVTeX, December 2014
 %
-%  Select the appropriate root directory and run with pdfLatex + Makeindex+bibtex
-\newcommand{\MainDir}{file:///y:/myfiles/Planung/2012-SonetLumiere/HomePage}
-%\def\litdir{y:/myfiles/jabref}
-\def\litdir{x:/sawoptik_databases/jabref}
-
-\bibliographystyle{\litdir/prsty}
-%\usepackage{\litdir/pylatex/python}
-
-\usepackage{makeidx}
-\makeindex
-
-%**********************************************************************
+%   Copyright (c) 2014 The American Physical Society.
 %
-% INCLUDEONLY
+%   See the REVTeX 4 README file for restrictions and more information.
 %
-%\def\rootdir{c:/progs/GetDP}
-\def\rootdir{.}
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.2
+%
+% See the REVTeX 4 README file
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex apssamp.tex
+%  2)  bibtex apssamp
+%  3)  latex apssamp.tex
+%  4)  latex apssamp.tex
+%
+% see http://web.mit.edu/8.13/www/revtex4-command-summary.pdf for a review of docclass options
+\documentclass[%
+% twocolumn,
+preprint,
+superscriptaddress,
+%groupedaddress,
+%unsortedaddress,
+%runinaddress,
+%frontmatterverbose, 
+%preprint,
+%preprintnumbers,
+%nofootinbib,
+%nobibnotes,
+%bibnotes,
+ amsmath,amssymb,
+% prl,
+ %aps,
+%pra,
+%prb,
+%rmp,
+%prstab,
+%prstper,
+prapplied,
+%prx,
+floatfix,
+tightenlines,
+]{revtex4-2}
 
-%\newcommand{\mycomment}[1]{}
-%\includeonly{progs/2DM42956/docs/GetDP_2DM42956}
-%\includeonly{\rootdir/docs/GetDP_theory}
-%\includeonly{\rootdir/projects//3DSAW05Focus/docs/3DSAW05Focus}
-%**********************************************************************
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{hyperref}% add hypertext capabilities
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
 
+\usepackage{tablefootnote}
+\usepackage{threeparttable}
+
+%\usepackage[showframe,%Uncomment any one of the following lines to test 
+%%scale=0.7, marginratio={1:1, 2:3}, ignoreall,% default settings
+%%text={7in,10in},centering,
+%%margin=1.5in,
+%%total={6.5in,8.75in}, top=1.2in, left=0.9in, includefoot,
+%%height=10in,a5paper,hmargin={3cm,0.8in},
+%]{geometry}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for Supplementary material in revtex
+
+%from https://support.authorea.com/en-us/article/how-to-create-an-appendix-section-or-supplementary-information-1g25i5a/
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{SM\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{SM\arabic{figure}}%
+        \setcounter{equation}{0}
+        \renewcommand{\theequation}{SM\arabic{equation}}%
+        \setcounter{section}{0}
+        \renewcommand{\thesection}{SM\arabic{section}}%
+     }
+
+  %\xdef\presupwidefigures{\arabic{figure*}}% save the current figure number
+  %\xdef\presupfiguress{\arabic{figure*}}% save the current figure number
+  %\renewcommand\thefigure*{S\fpeval{\arabic{figure}-\presupfiguress}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Revision tracking (change) package settings
+% see: http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/changes/changes.english.pdf
+
+\usepackage{xcolor}
+%\usepackage[draft]{changes}
+\usepackage[final]{changes}
+\definechangesauthor[color=green]{common}
+\definechangesauthor[color=red, name={Paulo Santos}]{PVS}
+%\definechangesauthor[color=blue]{MM}
+\definechangesauthor[color=red]{MM}
+
+%% Rather hacky definition of a plain remark/note by riding on \added
+\setauthormarkup{}
+%\let\newcite\cite 
+%\newcommand{\mcite}[1]{\mbox{\cite{#1}}}
+%\newcommand{\monlinecite}[1]{\mbox{\cite{#1}}}
+\newcommand{\rPVS}[2]{\replaced[id=PVS]{#1}{#2}}
+\newcommand{\aPVS}[1]{\added[id=PVS]{#1}}
+\newcommand{\dPVS}[1]{\deleted[id=PVS]{#1}}
+\newcommand{\cPVS}[1]{\comment[id=PVS]{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PVS Main SAW parameters (definition.tex)
+% SAW parameters
+\newcommand{\lSAW}{{\lambda_{\mathrm{SAW}}}}		% acoustic wavelength
+\newcommand{\vSAW}{{v_{\mathrm{SAW}}}}		% acoustic wavelength
+\newcommand{\fSAW}{{f_{\mathrm{SAW}}}}		% acoustic wavelength
+
+%%%% end %%%
 
 \begin{document}
 
-%\fontspec{Times New Roman} % options (among others) are: Cambria, Times New Roman, Segoe Print, etc  
-							%for options see http://ctan.mackichan.com/macros/latex/contrib/fontspec/fontspec.pdf
-%\fontspec{Cambria}
-\fontfamily{ptm}\selectfont
-%\fontfamily{Adobe Times}\selectfont
+%\preprint{APS/123-QED}
+\preprint{LAMMPS}
+
+\title[LAMMPS]{Lammps - Molecular Dynamics Simulations }
+% Force line breaks with \\
 
 
-\title{lammPS}
 \author{Paulo V. Santos}
-\date{Feb 2018 - \today}
+\email{santos@pdi-berlin.de}
+ \affiliation{Paul-Drude-Institut f\"ur Festk\"orperelektronik, Leibniz-Institut im Forschungsverbund e.V., Berlin, Germany}
+ 
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+\begin{abstract}
+Working with lammps!
+\end{abstract}
 
 \maketitle
-
-%{\let\newpage\relax\maketitle}
-
-%\begin{abstract}
-%Contains an overview of the data analysis files
-%\end{abstract}
-
-%\tableofcontents
-{\let\newpage\relax\tableofcontents}
-
-%**********************************************************************
-
-%\input{\litdir/definitions}
-\input{../GetDP/docs/definitions}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
 
 \section{General info}
 
 \begin{itemize}
 \item Project website: 
-\item Language reference: \href{http://lammps.sandia.gov/doc}{references}
-\item Simple tutorial: \href{http://wp.df.uba.ar/gebi/wp-content/uploads/sites/9/2016/06/lammps.pdf}{lammps for dummies}
+\item Language reference: 
+   \begin{itemize}
+      \item \href{http://lammps.sandia.gov/doc}{http://lammps.sandia.gov/doc}
+      \item github: \href{ https://github.com/lammps/lammps/}{https://github.com/lammps/lammps/}
+   \end{itemize}
+\item Tutorials
+   \begin{itemize}
+      \item Simple tutorial: \href{http://wp.df.uba.ar/gebi/wp-content/uploads/sites/9/2016/06/lammps.pdf}{lammps for dummies}
+      \item Tutorial: \href{https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS_Tutorial_1}{tutorial 1}%{https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS\_Tutorial\_1}
+      %\item Tutorial: \href{https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS_Tutorial_1}{tutorial 1 https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS-Tutorial-1}
+      \item Examples: \href{https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS_tutorials}{tutorial 2}%{https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS\_tutorials}
+      \item \href{http://puccini.che.pitt.edu/~karlj/Classes/CHE3935/MD_simulations.pdf}{Good for input file: slide 40 on!}
+   \end{itemize}
+
+%{https://icme.hpc.msstate.edu/mediawiki/index.php/LAMMPS\_Tutorial\_1}
 \item making videos: see linux-docs.pdf
 \end{itemize}
 
-%\def\GetDPRootRir{y:/myfiles/data/Elmer_Salome/GetDP}
-%\def\GetDPRootDir{\rootdir}
+\noindent{\em Acknowledgements: }{We thank $\dots$. PVS acknowledge financial support from the German DAAD (grant 57314018) and DFG (grant 4056192179), respectively.}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% General files
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% GetDP section
-%\graphicspath{docs/}
-\include{\rootdir/docs/GetDP_install}
-%\include{\rootdir/docs/GetDP_SAW2D}
+%%%%%%%%%%%%%%%%%%%%%%%
+%\bibliographystyle{apsrev4-2}
+%\bibliographystyle{plain}
+\IfFileExists{x:/sawoptik_databases/jabref/literature.bib}
+{   \def\litdir{x:/sawoptik_databases/jabref} }
+{	\def\litdir{c:/myfiles/jabref} }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Project files
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\include{\rootdir/docs/GetDP_3DDL}
-
- 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Appendices
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{appendices}
-\include{Appendix}
-%\include{GetDP_Usage}
-% Summary of the changes in the SAW2D and SAW3D programs
-\include{\rootdir/docs/GetDP_ChangeLog} 
-\end{appendices}
-
-% Create the reference section using BibTeX:
-
+%\bibliography{\litdir/literature,\litdir/mypapers,GaussianFocus}
 \bibliography{\litdir/literature,\litdir/mypapers}
-%\bibliography{x:/sawoptik_databases/jabref/literature,x:/sawoptik_databases/jabref/mypapers}
-
 \end{document}
+%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: "lammPS"
-%%% End: 
