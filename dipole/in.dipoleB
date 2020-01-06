@@ -26,6 +26,10 @@ set		group all dipole/random 98934 0.75      # see p771: seed and dipole length
 
 velocity	all create 0.0 87287 mom no		    # p829: set velocity for all atoms at 0K and seed 87287, mon no: linear momentum not zeroed
 
+# Boundary conditions
+#fix 	mywalls all wall/region box lj126 0.1 0.1 2.5
+#fix 	mywalls all wall/region box lj126 ${EWall} 0.1 2.5  # wall potential
+
 pair_style	lj/cut/dipole/cut 2.5			    # p1556
 pair_coeff	* * 1.0 1.0
 
@@ -34,9 +38,10 @@ neigh_modify	delay 0					        # p670
 
 fix		1 all nve/sphere update dipole		    # p840 and 1095
 fix		2 all enforce2d				            # p951
-fix     efield  all efield 0 0 1
+fix     efield  all efield 0 0 10
 #fix     3 all nve
-#fix     4 all langevin 1.0 0.01 1000.0 699483
+fix     4 all langevin 0.0001 0.0001 100.0 699483 omega yes
+#fix     3 all nvt temp .01 .01 100.0
 
 timestep	0.005
 
@@ -51,5 +56,5 @@ thermo		500					                # p792
 dump m0 all movie 10 movie.mpg mux type  zoom 1.8 adiam 1 size 640 480
 dump_modify	m0 pad 5
 
-run		10000
+run		20000
 #run		10000

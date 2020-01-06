@@ -93,7 +93,7 @@ timestep	0.005
 
 #variable      force atom 5*cos((2*2*PI/v_xlim)*(x+v_vSAW*step*dt))      # works
 #fix           flow all addforce v_force 0 0
-variable      force atom v_ASAW*v_kSAW*cos(v_kSAW*(x+v_vSAW*step*dt))                   # works
+#variable      force atom v_ASAW*v_kSAW*cos(v_kSAW*(x+v_vSAW*step*dt))                   # works
 #fix           flow latom addforce v_force 0 0
 #fix           flow all addforce v_force 0 0
 #fix           flow1 latom setforce 0 0 0
@@ -101,6 +101,8 @@ variable      force atom v_ASAW*v_kSAW*cos(v_kSAW*(x+v_vSAW*step*dt))           
 ###########################################################
 
 fix 	1 all nve
+#fix     5 all langevin 0.0001 0.0001 500.0 699483 #omega yes
+
 thermo	100
 run	5000
 
